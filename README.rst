@@ -173,6 +173,14 @@ As a convenience, to retrieve all of the results in a single local method call u
 
     sf.query_all("SELECT Id, Email FROM Contact WHERE LastName = 'Jones'")
 
+While ``query_all`` materializes the whole result into a Python list, ``query_all_iter`` returns an iterator, which allows you to lazily process each element separately
+
+.. code-block:: python
+
+    data = sf.query_all_iter("SELECT Id, Email FROM Contact WHERE LastName = 'Jones'")
+    for row in data:
+      process(row)
+
 SOSL queries are done via:
 
 .. code-block:: python
@@ -238,7 +246,7 @@ Create new records:
 .. code-block:: python
 
     data = [
-          {'LastName':'Smith','Email':'example@example.com'}, 
+          {'LastName':'Smith','Email':'example@example.com'},
           {'LastName':'Jones','Email':'test@test.com'}
         ]
 
@@ -249,7 +257,7 @@ Update existing records:
 .. code-block:: python
 
     data = [
-          {'Id': '0000000000AAAAA', 'Email': 'examplenew@example.com'}, 
+          {'Id': '0000000000AAAAA', 'Email': 'examplenew@example.com'},
           {'Id': '0000000000BBBBB', 'Email': 'testnew@test.com'}
         ]
 
@@ -260,7 +268,7 @@ Upsert records:
 .. code-block:: python
 
     data = [
-          {'Id': '0000000000AAAAA', 'Email': 'examplenew2@example.com'}, 
+          {'Id': '0000000000AAAAA', 'Email': 'examplenew2@example.com'},
           {'Email': 'foo@foo.com'}
         ]
 
@@ -368,4 +376,4 @@ The latest build status can be found at `Travis CI`_
 .. _community contributors: https://github.com/simple-salesforce/simple-salesforce/graphs/contributors
 .. _RestForce: http://pypi.python.org/pypi/RestForce/
 .. _GitHub Repo: https://github.com/simple-salesforce/simple-salesforce
-.. _Travis CI: https://travis-ci.org/simple-salesforce/simple-salesforce
+.. _Travis CI: https://travis-ci.com/simple-salesforce/simple-salesforce
